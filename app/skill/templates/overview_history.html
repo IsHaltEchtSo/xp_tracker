@@ -1,0 +1,99 @@
+{% extends 'navbar.html' %}
+
+{% block content %}
+    <div class="history box">
+        <table>
+            <tr>
+                <th>Date</th>
+                <th>XP</th>
+                <th>Summary</th>
+            </tr>
+            <tr>
+                <td>20/11/21</td>
+                <td>30</td>
+                <td>Projecteer</td>
+            </tr>
+            <tr>
+                <td>20/11/21</td>
+                <td>30</td>
+                <td>Projecteer</td>
+            </tr>
+            <tr>
+                <td>20/11/21</td>
+                <td>30</td>
+                <td>Projecteer</td>
+            </tr>
+            <tr>
+                <td>20/11/21</td>
+                <td>30</td>
+                <td>Projecteer</td>
+            </tr>
+            <tr>
+                <td>20/11/21</td>
+                <td>30</td>
+                <td>Projecteer</td>
+            </tr>
+            <tr>
+                <td>20/11/21</td>
+                <td>30</td>
+                <td>Projecteer</td>
+            </tr>
+        </table>
+        <a href={{ url_for('skill.skills_graph_overview')}}>Graphical View</a>
+    </div>
+    <div class="skills-list">
+        <div class="skill-card">
+            <a href={{ url_for('skill.skill_page_historic', skill='js')}}> <p>JS</p> </a>
+            <hr>
+            <h1>Lv10</h1>
+        </div>
+
+        <div class="skill-card">
+            <p>JS</p>
+            <hr>
+            <h1>Lv10</h1>
+        </div>
+
+        <div class="skill-card">
+            <p>JS</p>
+            <hr>
+            <h1>Lv10</h1>
+        </div>
+
+        <div class="skill-card">
+            <p>JS</p>
+            <hr>
+            <h1>Lv10</h1>
+        </div>
+
+        <div class="skill-card">
+            <p>JS</p>
+            <hr>
+            <h1>Lv10</h1>
+        </div>
+
+        <div class="skill-card">
+            <p>JS</p>
+            <hr>
+            <h1>Lv10</h1>
+        </div>
+
+        <div class="skill-card">
+            <p>JS</p>
+            <hr>
+            <h1>Lv10</h1>
+        </div>
+
+        <div class="skill-card">
+            <p>JS</p>
+            <hr>
+            <h1>Lv10</h1>
+        </div>
+
+        <div class="skill-card">
+            <p>JS</p>
+            <hr>
+            <h1>Lv10</h1>
+        </div>
+    </div>
+{% endblock content %}

@@ -1,0 +1,50 @@
+{% extends 'navbar.html' %}
+
+{% block content %}
+    <h1>{{skill}}</h1>
+    <div class="history box">
+        <table>
+            <tr>
+                <th>Date</th>
+                <th>XP</th>
+                <th>Summary</th>
+            </tr>
+            <tr>
+                <td>20/11/21</td>
+                <td>30</td>
+                <td>Projecteer</td>
+            </tr>
+            <tr>
+                <td>20/11/21</td>
+                <td>30</td>
+                <td>Projecteer</td>
+            </tr>
+            <tr>
+                <td>20/11/21</td>
+                <td>30</td>
+                <td>Projecteer</td>
+            </tr>
+            <tr>
+                <td>20/11/21</td>
+                <td>30</td>
+                <td>Projecteer</td>
+            </tr>
+            <tr>
+                <td>20/11/21</td>
+                <td>30</td>
+                <td>Projecteer</td>
+            </tr>
+            <tr>
+                <td>20/11/21</td>
+                <td>30</td>
+                <td>Projecteer</td>
+            </tr>
+        </table>
+        <a href={{ url_for('skill.skill_page_graphical', skill='js')}}>Graphical View</a>
+    </div>
+
+    <div class="session-form">
+        <h1>this is the form to submit</h1>
+        <a href={{ url_for('skill.reward_page', skill=skill)}}>submit</a>
+    </div>
+{% endblock content %}
