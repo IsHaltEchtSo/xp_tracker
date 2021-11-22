@@ -1,4 +1,5 @@
-from flask import Blueprint, render_template, url_for
+from flask import Blueprint, render_template, url_for, request, redirect, url_for
+from .forms import SkillForm
 
 skill = Blueprint(
     'skill', __name__, url_prefix='/skills', template_folder='templates'
@@ -16,14 +17,24 @@ def skills_history_overview():
     return render_template('overview_history.html')
 
 
-@skill.route('/<skill>/history')
+@skill.route('/<skill>/history', methods=['POST', 'GET'])
 def skill_page_historic(skill):
-    return render_template('skill-historic.html', skill=skill)
+    form = SkillForm(request.form)
+
+    if request.method == 'POST' and form.validate():
+        return redirect(url_for('skill.reward_page', skill=form.session_topic.data))
+
+    return render_template('skill-historic.html', skill=skill, form=form)
 
 
-@skill.route('/<skill>/graph')
+@skill.route('/<skill>/graph', methods=['POST', 'GET'])
 def skill_page_graphical(skill):
-    return render_template('skill-graphical.html', skill=skill)
+    form = SkillForm(request.form)
+
+    if request.method == 'POST' and form.validate():
+        return redirect(url_for('skill.reward_page', skill=form.session_topic.data))
+
+    return render_template('skill-graphical.html', skill=skill, form=form)
 
 
 @skill.route('/<skill>/reward')

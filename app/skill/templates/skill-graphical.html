@@ -7,7 +7,15 @@
     </div>
 
     <div class="session-form">
-        <h1>this is the form to submit</h1>
-        <a href={{ url_for('skill.reward_page', skill=skill)}}>submit</a>
+        <form method="post">
+            <ul>
+                {% for field in form %}
+                    <li>{{field.label}}</li>
+                    <li>{{field}}</li>
+                {% endfor %}
+            </ul>
+            <input type="submit" value="get xp">
+        </form>
     </div>
+    
 {% endblock content %}
