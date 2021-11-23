@@ -40,3 +40,8 @@ def skill_page_graphical(skill):
 @skill.route('/<skill>/reward')
 def reward_page(skill):
     return render_template('reward.html', skill=skill)
+
+
+@skill.app_errorhandler(404)
+def not_found(error):
+    return render_template('404.html', error=error), 404
