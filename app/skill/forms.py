@@ -1,6 +1,7 @@
-from wtforms import Form, StringField, IntegerField
+from flask_wtf import FlaskForm
+from wtforms import StringField, IntegerField
 
-class SkillForm(Form):
+class SkillForm(FlaskForm):
     session_topic   = StringField()
     expose          = IntegerField()
     entry           = IntegerField()
