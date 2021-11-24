@@ -1,9 +1,9 @@
 from flask_wtf import FlaskForm
-from wtforms import StringField, IntegerField
+from wtforms import StringField, IntegerField, validators
 
-class SkillForm(FlaskForm):
+class SessionForm(FlaskForm):
     session_topic   = StringField()
-    expose          = IntegerField()
-    entry           = IntegerField()
-    entry_figure    = IntegerField()
-    recap           = IntegerField()
+    expose          = IntegerField(validators=[validators.optional()])
+    entry           = IntegerField(validators=[validators.optional()])
+    entry_figure    = IntegerField(validators=[validators.optional()])
+    recap           = IntegerField(validators=[validators.optional()])
