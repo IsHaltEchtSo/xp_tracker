@@ -38,9 +38,9 @@ def index():
 def skill_page(skill_index):
     skills = load_session_skills()
     skill = skills[skill_index]
-    skill_sessions = skill['skill_sessions']
+    skill_sessions = skill['sessions']
 
-    return render_template('skill-historic.html',
+    return render_template('skill.html',
         skill=skill,
         skill_index=skill_index,
         skill_sessions=skill_sessions
