@@ -6,5 +6,5 @@ def not_found(error):
     return render_template('404.html', error=error), 404
 
 @skill.route('/zk')
-def zk_page():
+def construction_page():
     return render_template('zk.html')
