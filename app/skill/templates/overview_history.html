@@ -1,6 +1,8 @@
 {% extends 'base.html' %}
 
 {% block content %}
+
+    <!-- SESSIONS LISTING -->
     <div class="history box">
         <table>
             <tr>
@@ -8,92 +10,27 @@
                 <th>XP</th>
                 <th>Summary</th>
             </tr>
-            <tr>
-                <td>20/11/21</td>
-                <td>30</td>
-                <td>Projecteer</td>
-            </tr>
-            <tr>
-                <td>20/11/21</td>
-                <td>30</td>
-                <td>Projecteer</td>
-            </tr>
-            <tr>
-                <td>20/11/21</td>
-                <td>30</td>
-                <td>Projecteer</td>
-            </tr>
-            <tr>
-                <td>20/11/21</td>
-                <td>30</td>
-                <td>Projecteer</td>
-            </tr>
-            <tr>
-                <td>20/11/21</td>
-                <td>30</td>
-                <td>Projecteer</td>
-            </tr>
-            <tr>
-                <td>20/11/21</td>
-                <td>30</td>
-                <td>Projecteer</td>
-            </tr>
+            {% for session in sessions %}
+                <tr>
+                    <td>{{session.date}}</td>
+                    <td>{{session.xp}}</td>
+                    <td>{{session.topic}}</td>
+                </tr>
+            {% endfor %}
         </table>
-        <a href={{ url_for('skill.skills_graph_overview')}}>Graphical View</a>
     </div>
+
+    <!-- SKILLS LISTING -->
     <div class="skills-list">
-        <div class="skill-card">
-            <a href={{ url_for('skill.skill_page_historic', skill='js')}}> <p>JS</p> </a>
-            <hr>
-            <h1>Lv10</h1>
-        </div>
-
-        <div class="skill-card">
-            <p>JS</p>
-            <hr>
-            <h1>Lv10</h1>
-        </div>
-
-        <div class="skill-card">
-            <p>JS</p>
-            <hr>
-            <h1>Lv10</h1>
-        </div>
-
-        <div class="skill-card">
-            <p>JS</p>
-            <hr>
-            <h1>Lv10</h1>
-        </div>
-
-        <div class="skill-card">
-            <p>JS</p>
-            <hr>
-            <h1>Lv10</h1>
-        </div>
-
-        <div class="skill-card">
-            <p>JS</p>
-            <hr>
-            <h1>Lv10</h1>
-        </div>
-
-        <div class="skill-card">
-            <p>JS</p>
-            <hr>
-            <h1>Lv10</h1>
-        </div>
-
-        <div class="skill-card">
-            <p>JS</p>
-            <hr>
-            <h1>Lv10</h1>
-        </div>
-
-        <div class="skill-card">
-            <p>JS</p>
-            <hr>
-            <h1>Lv10</h1>
-        </div>
+        {% for skill in skills %}
+            <div class="skill-card">
+                <a href={{ url_for('skill.skill_page_historic', skill_index=loop.index0) }}>
+                     <p>{{skill.name}}</p>
+                 </a>
+                <hr>
+                <h3>Lv10</h3>
+            </div>
+        {% endfor %}
     </div>
+
 {% endblock content %}

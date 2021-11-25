@@ -7,44 +7,34 @@ skill = Blueprint(
     'skill', __name__, url_prefix='/skills', template_folder='templates'
 )
 
+
 from .errorhandlers import *
+from .helper_functions import load_session_skills
+
 
 @skill.route('/')
 @skill.route('/overview/history')
 def skills_history_overview():
-    with skill.open_resource('json/skills.json', 'r') as f:
-        skills = json.load(f)
+    skills = load_session_skills()
+    sessions = []
+    for skill_ in skills:
+        for session in skill_['sessions']:
+            sessions.append(session)
 
-    return render_template('overview_history.html', skills=skills)
-
-
-
-@skill.route('/overview/graph')
-def skills_graph_overview():
-    return render_template('overview_graph.html', skills=skills)
+    return render_template('overview_history.html', skills=skills, sessions=sessions)
 
 
+@skill.route('/<int:skill_index>/history', methods=['POST', 'GET'])
+def skill_page_historic(skill_index):
+    skills = load_session_skills()
+    skill = skills[skill_index]
+    sessions = skill['sessions']
 
-@skill.route('/<skill>/history', methods=['POST', 'GET'])
-def skill_page_historic(skill):
-    form = SessionForm(request.form)
-
-    if request.method == 'POST' and form.validate():
-        return redirect(url_for('skill.reward_page', skill=form.session_topic.data))
-
-    return render_template('skill-historic.html', skill=skill, form=form)
-
-
-
-@skill.route('/<skill>/graph', methods=['POST', 'GET'])
-def skill_page_graphical(skill):
-    form = SessionForm(request.form)
-
-    if request.method == 'POST' and form.validate():
-        return redirect(url_for('skill.reward_page', skill=form.session_topic.data))
-
-    return render_template('skill-graphical.html', skill=skill, form=form)
-
+    return render_template('skill-historic.html',
+        skill=skill,
+        skill_index=skill_index,
+        sessions=sessions
+    )
 
 
 @skill.route('/<skill>/reward')

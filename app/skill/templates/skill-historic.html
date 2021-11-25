@@ -1,7 +1,7 @@
 {% extends 'base.html' %}
 
 {% block content %}
-    <h1>{{skill}}</h1>
+    <!-- SESSIONS LISTING -->
     <div class="history box">
         <table>
             <tr>
@@ -9,50 +9,14 @@
                 <th>XP</th>
                 <th>Summary</th>
             </tr>
-            <tr>
-                <td>20/11/21</td>
-                <td>30</td>
-                <td>Projecteer</td>
-            </tr>
-            <tr>
-                <td>20/11/21</td>
-                <td>30</td>
-                <td>Projecteer</td>
-            </tr>
-            <tr>
-                <td>20/11/21</td>
-                <td>30</td>
-                <td>Projecteer</td>
-            </tr>
-            <tr>
-                <td>20/11/21</td>
-                <td>30</td>
-                <td>Projecteer</td>
-            </tr>
-            <tr>
-                <td>20/11/21</td>
-                <td>30</td>
-                <td>Projecteer</td>
-            </tr>
-            <tr>
-                <td>20/11/21</td>
-                <td>30</td>
-                <td>Projecteer</td>
-            </tr>
+            {% for session in sessions %}
+                <tr>
+                    <td>{{session.date}}</td>
+                    <td>{{session.xp}}</td>
+                    <td>{{session.topic}}</td>
+                </tr>
+            {% endfor %}
         </table>
-        <a href={{ url_for('skill.skill_page_graphical', skill='js')}}>Graphical View</a>
-    </div>
-
-    <div class="session-form">
-        <form method="post">
-            <ul>
-                {% for field in form %}
-                    <li>{{field.label}}</li>
-                    <li>{{field}}</li>
-                {% endfor %}
-            </ul>
-            <input type="submit" value="get xp">
-        </form>
     </div>
 
 {% endblock content %}
