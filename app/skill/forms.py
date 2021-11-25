@@ -7,3 +7,6 @@ class SessionForm(FlaskForm):
     entry           = IntegerField(validators=[validators.optional()])
     entry_figure    = IntegerField(validators=[validators.optional()])
     recap           = IntegerField(validators=[validators.optional()])
+
+class SkillForm(FlaskForm):
+    skill_name = StringField()

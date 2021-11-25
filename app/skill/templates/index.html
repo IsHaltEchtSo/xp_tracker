@@ -24,13 +24,24 @@
     <div class="skills-list">
         {% for skill in skills %}
             <div class="skill-card">
-                <a href={{ url_for('skill.skill_page_historic', skill_index=loop.index0) }}>
+                <a href={{ url_for('skill.skill_page', skill_index=loop.index0) }}>
                      <p>{{skill.name}}</p>
                  </a>
+                <h3>Lv {{ skill.lv }}</h3>
                 <hr>
-                <h3>Lv10</h3>
             </div>
         {% endfor %}
     </div>
+
+    <!-- FORM TO ADD SKILLS -->
+    <form class="skill-form" action='{{ url_for('skill.index') }}' method="post">
+        {{ form.csrf_token }}
+        {% for field in form if field.id != 'csrf_token' %}
+            {{ field.label }}
+            {{ field }}
+            <br>
+        {% endfor %}
+        <input type="submit" value="add skill">
+    </form>
 
 {% endblock content %}

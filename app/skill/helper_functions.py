@@ -17,3 +17,9 @@ def load_session_skills():
             # print('new skills in session')
     finally:
         return skills
+
+
+def add_skill_to_session_from(form, skills):
+    new_skill = {'name':form.skill_name.data, 'xp':'0', 'lv':'1', 'sessions':[]}
+    skills.append(new_skill)
+    session['skills'] = skills

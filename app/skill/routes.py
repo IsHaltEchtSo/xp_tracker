@@ -1,5 +1,5 @@
 from flask import Blueprint, render_template, url_for, request, redirect, url_for, session
-from .forms import SessionForm
+from .forms import SessionForm, SkillForm
 import json
 
 
@@ -9,32 +9,43 @@ skill = Blueprint(
 
 
 from .errorhandlers import *
-from .helper_functions import load_session_skills
+from .helper_functions import load_session_skills, add_skill_to_session_from
 
 
-@skill.route('/')
-@skill.route('/overview/history')
-def skills_history_overview():
+@skill.route('/', methods=['POST', 'GET'])
+@skill.route('/overview', methods=['POST', 'GET'])
+def index():
+    form = SkillForm(request.form)
     skills = load_session_skills()
-    sessions = []
+    skill_sessions = []
     for skill_ in skills:
-        for session in skill_['sessions']:
-            sessions.append(session)
+        for skill_session in skill_['sessions']:
+            skill_sessions.append(skill_session)
 
-    return render_template('overview_history.html', skills=skills, sessions=sessions)
+    if request.method == 'POST' and form.validate():
+        add_skill_to_session_from(form, skills)
+        return redirect(url_for('skill.index'))
+
+    return render_template('index.html',
+        form=form,
+        skills=skills,
+        skill_sessions=skill_sessions
+    )
 
 
-@skill.route('/<int:skill_index>/history', methods=['POST', 'GET'])
-def skill_page_historic(skill_index):
+
+@skill.route('/<int:skill_index>', methods=['POST', 'GET'])
+def skill_page(skill_index):
     skills = load_session_skills()
     skill = skills[skill_index]
-    sessions = skill['sessions']
+    skill_sessions = skill['skill_sessions']
 
     return render_template('skill-historic.html',
         skill=skill,
         skill_index=skill_index,
-        sessions=sessions
+        skill_sessions=skill_sessions
     )
+
 
 
 @skill.route('/<skill>/reward')
