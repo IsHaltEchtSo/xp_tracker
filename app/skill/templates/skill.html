@@ -19,4 +19,18 @@
         </table>
     </div>
 
+    <hr class="form-break">
+
+    <!-- SESSION FORM -->
+    <h3>Add a session and earn some XP</h3>
+    <form class="session-form" action={{ url_for('skill.skill_page', skill_index=skill_index) }} method="post">
+            {{ form.csrf_token }}
+            {% for field in form if field.widget.input_type != 'hidden' %}
+                {{ field.label }}
+                {{ field }}
+                <br>
+            {% endfor %}
+            <input type="submit"  value="get that xp!">
+    </form>
+
 {% endblock content %}

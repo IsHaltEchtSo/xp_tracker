@@ -36,14 +36,19 @@ def index():
 
 @skill.route('/<int:skill_index>', methods=['POST', 'GET'])
 def skill_page(skill_index):
+    form = SessionForm(request.form)
     skills = load_session_skills()
     skill = skills[skill_index]
     skill_sessions = skill['sessions']
 
+    if request.method == 'POST' and form.validate():
+        return redirect(url_for('skill.reward_page', skill=skill['name']))
+
     return render_template('skill.html',
         skill=skill,
         skill_index=skill_index,
-        skill_sessions=skill_sessions
+        skill_sessions=skill_sessions,
+        form=form
     )
 
 
