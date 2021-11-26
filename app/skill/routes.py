@@ -9,7 +9,9 @@ skill = Blueprint(
 
 
 from .errorhandlers import *
-from .helper_functions import load_session_skills, add_skill_to_session_from
+from .helper_functions import (
+    load_session_skills, add_skill_to_session_from, dump_skills_from_bp_to
+)
 
 
 @skill.route('/', methods=['POST', 'GET'])
@@ -23,7 +25,8 @@ def index():
             skill_sessions.append(skill_session)
 
     if request.method == 'POST' and form.validate():
-        add_skill_to_session_from(form, skills)
+        add_skill_to_session_from(form)
+        dump_skills_from_bp_to('json/skills.json')
         return redirect(url_for('skill.index'))
 
     return render_template('index.html',
