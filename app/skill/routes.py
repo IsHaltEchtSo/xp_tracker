@@ -43,7 +43,6 @@ def index():
 def skill_page(skill_index):
     form = SessionForm(request.form)
     skills = load_skills_from(path='json/skills.json')
-    print(skills)
     skill_ = skills[skill_index]
     skill_sessions = skill_['sessions']
 
