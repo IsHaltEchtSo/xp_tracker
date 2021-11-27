@@ -19,7 +19,6 @@ from .helper_functions import (
 def index():
     form = SkillForm(request.form)
     skills = load_skills_from(path='json/skills.json')
-    # skills = load_session_skills()
     skill_sessions = []
 
     for skill_ in skills:
@@ -27,7 +26,6 @@ def index():
             skill_sessions.append(skill_session)
 
     if request.method == 'POST' and form.validate():
-        # add_skill_to_session_from(form)
         new_skill = {'name':form.skill_name.data, 'xp':'0', 'lv':'1', 'sessions':[]}
         skills.append(new_skill)
         dump_skills_to('json/skills.json', skills)
@@ -46,7 +44,6 @@ def skill_page(skill_index):
     form = SessionForm(request.form)
     skills = load_skills_from(path='json/skills.json')
     print(skills)
-    # skills = load_session_skills()
     skill_ = skills[skill_index]
     skill_sessions = skill_['sessions']
 
@@ -57,7 +54,7 @@ def skill_page(skill_index):
         skill_sessions.append(new_session)
         skill_['sessions'] = skill_sessions
         skills[skill_index] = skill_
-        
+
         dump_skills_to(path='json/skills.json', skills=skills)
         return redirect(url_for('skill.reward_page', skill=skill_['name']))
 
