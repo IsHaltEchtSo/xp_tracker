@@ -22,12 +22,12 @@
 
     <!-- SKILLS LISTING -->
     <div class="skills-list">
-        {% for skill in skills %}
+        {% for skill_name, skill_object in skills.items() %}
             <div class="skill-card">
-                <a href={{ url_for('skill.skill_page', skill_index=loop.index0) }}>
-                     <p>{{skill.name}}</p>
+                <a href={{ url_for('skill.skill_page', skill_name=skill_name) }}>
+                     <p>{{skill_object.name}}</p>
                  </a>
-                <h3>Lv {{ skill.lv }}</h3>
+                <h3>Lv {{ skill_object.lv }}</h3>
                 <hr>
             </div>
         {% endfor %}
