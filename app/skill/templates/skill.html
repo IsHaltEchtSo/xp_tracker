@@ -23,7 +23,7 @@
 
     <!-- SESSION FORM -->
     <h3>Add a session and earn some XP</h3>
-    <form class="session-form" action={{ url_for('skill.skill_page', skill_name=skill_name) }} method="post">
+    <form class="session-form" action={{ url_for('skill_bp.skill_page', skill_name=skill_name) }} method="post">
             {{ form.csrf_token }}
             {% for field in form if field.widget.input_type != 'hidden' %}
                 {{ field.label }}

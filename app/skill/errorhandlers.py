@@ -1,10 +1,10 @@
-from .routes import skill
+from .routes import skill_bp
 from flask import render_template
 
-@skill.app_errorhandler(404)
+@skill_bp.app_errorhandler(404)
 def not_found(error):
     return render_template('404.html', error=error), 404
 
-@skill.route('/construction')
+@skill_bp.route('/construction')
 def construction_page():
     return render_template('zk.html')

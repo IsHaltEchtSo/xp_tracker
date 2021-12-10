@@ -3,8 +3,8 @@ from .forms import SessionForm, SkillForm
 import json
 
 
-skill = Blueprint(
-    'skill', __name__, url_prefix='/skills', template_folder='templates'
+skill_bp = Blueprint(
+    'skill_bp', __name__, url_prefix='/skills', template_folder='templates'
 )
 
 
@@ -14,8 +14,8 @@ from .helper_functions import (
 )
 
 
-@skill.route('/', methods=['POST', 'GET'])
-@skill.route('/overview', methods=['POST', 'GET'])
+@skill_bp.route('/', methods=['POST', 'GET'])
+@skill_bp.route('/overview', methods=['POST', 'GET'])
 def index():
     form = SkillForm(request.form)
     skills = load_skills_from(path='json/skills.json')
@@ -30,7 +30,7 @@ def index():
         new_skill = {'name':new_skill_name, 'xp':'0', 'lv':'1', 'sessions':[]}
         skills[new_skill_name] = new_skill
         dump_skills_to('json/skills.json', skills)
-        return redirect(url_for('skill.index'))
+        return redirect(url_for('skill_bp.index'))
 
     return render_template('index.html',
         form=form,
@@ -40,7 +40,7 @@ def index():
 
 
 
-@skill.route('/<skill_name>', methods=['POST', 'GET'])
+@skill_bp.route('/<skill_name>', methods=['POST', 'GET'])
 def skill_page(skill_name):
     form = SessionForm(request.form)
     skills = load_skills_from(path='json/skills.json')
@@ -56,7 +56,7 @@ def skill_page(skill_name):
         skills[skill_name]['sessions'] = skill_sessions
 
         dump_skills_to(path='json/skills.json', skills=skills)
-        return redirect(url_for('skill.reward_page', skill=skill_name))
+        return redirect(url_for('skill_bp.reward_page', skill=skill_name))
 
     return render_template('skill.html',
         skill=skills[skill_name],
@@ -67,6 +67,6 @@ def skill_page(skill_name):
 
 
 
-@skill.route('/<skill>/reward')
+@skill_bp.route('/<skill>/reward')
 def reward_page(skill):
     return render_template('reward.html', skill=skill)
