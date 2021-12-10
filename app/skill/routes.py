@@ -21,13 +21,14 @@ def index():
     skills = load_skills_from(path='json/skills.json')
     skill_sessions = []
 
-    for skill_ in skills:
-        for skill_session in skill_['sessions']:
+    for skill_name, skill_props in skills.items():
+        for skill_session in skill_props['sessions']:
             skill_sessions.append(skill_session)
 
     if request.method == 'POST' and form.validate():
-        new_skill = {'name':form.skill_name.data, 'xp':'0', 'lv':'1', 'sessions':[]}
-        skills.append(new_skill)
+        new_skill_name = form.skill_name.data
+        new_skill = {'name':new_skill_name, 'xp':'0', 'lv':'1', 'sessions':[]}
+        skills[new_skill_name] = new_skill
         dump_skills_to('json/skills.json', skills)
         return redirect(url_for('skill.index'))
 
@@ -39,27 +40,27 @@ def index():
 
 
 
-@skill.route('/<int:skill_index>', methods=['POST', 'GET'])
-def skill_page(skill_index):
+@skill.route('/<skill_name>', methods=['POST', 'GET'])
+def skill_page(skill_name):
     form = SessionForm(request.form)
     skills = load_skills_from(path='json/skills.json')
-    skill_ = skills[skill_index]
-    skill_sessions = skill_['sessions']
+    # skill_ = skills[skill_index]
+    skill_sessions = skills[skill_name]['sessions']
 
     if request.method == 'POST' and form.validate():
         new_session = {
             'date':'11.11.11','xp':'20','topic':'gangsters in paradise','mediums':[]
         }
         skill_sessions.append(new_session)
-        skill_['sessions'] = skill_sessions
-        skills[skill_index] = skill_
+        # skill_['sessions'] = skill_sessions
+        skills[skill_name]['sessions'] = skill_sessions
 
         dump_skills_to(path='json/skills.json', skills=skills)
-        return redirect(url_for('skill.reward_page', skill=skill_['name']))
+        return redirect(url_for('skill.reward_page', skill=skill_name))
 
     return render_template('skill.html',
-        skill=skill_,
-        skill_index=skill_index,
+        skill=skills[skill_name],
+        skill_name=skill_name,
         skill_sessions=skill_sessions,
         form=form
     )
