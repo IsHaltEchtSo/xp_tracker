@@ -22,15 +22,20 @@ def index():
     skills = load_skills_from(path='json/skills.json')
     skill_sessions = []
 
-    for skill_name, skill_props in skills.items():
-        for skill_session in skill_props['sessions']:
+    # load all sessions from all skills
+    for skill in skills.values():
+        for skill_session in skill['sessions']:
             skill_sessions.append(skill_session)
 
+    # process form and update skills
     if request.method == 'POST' and form.validate():
+        # init new skill
         new_skill_name = form.skill_name.data
         new_skill = {'name':new_skill_name, 'xp':0, 'lv':'1', 'sessions':[]}
+        # add to skills and save as json
         skills[new_skill_name] = new_skill
         dump_skills_to(path='json/skills.json', skills=skills)
+
         return redirect(url_for('skill_bp.index'))
 
     return render_template('index.html',
@@ -46,7 +51,6 @@ def skill_page(skill_name):
     form = SessionForm(request.form)
     skills = load_skills_from(path='json/skills.json')
     skill = skills[skill_name]
-    skill_sessions = skill['sessions']
 
     if request.method == 'POST' and form.validate():
         xp_rewards = load_xp_rewards()
@@ -57,6 +61,8 @@ def skill_page(skill_name):
         }
         populated_medium_fields = {}
 
+        # filter medium fields for later use
+        # use topic field as the session's topic
         for field in form:
             if field.widget.input_type != 'hidden':
                 if field.name != 'topic' and field.data:
@@ -64,21 +70,18 @@ def skill_page(skill_name):
                 elif field.name == 'topic':
                     new_session['topic'] = field.data
 
+        # process the session's mediums
         for medium_name, medium_value in populated_medium_fields.items():
-            xp = xp_rewards[medium_name] * medium_value
-
             new_medium = {
                 'medium': medium_name,
                 'amount': medium_value,
-                'xp':xp
+                'xp': xp_rewards[medium_name] * medium_value
             }
-
-            new_session['xp'] += xp
             new_session['mediums'].append(new_medium)
+            new_session['xp'] += new_medium['xp']
 
-
-        skill_sessions.append(new_session)
-        skill['sessions'] = skill_sessions
+        # append session to skill and update xp/lv of the skill
+        skill['sessions'].append(new_session)
         skill['xp'] += new_session['xp']
         skill['lv'] = calculate_lv(skill['xp'])
 
@@ -88,7 +91,7 @@ def skill_page(skill_name):
     return render_template('skill.html',
         skill=skill,
         skill_name=skill_name,
-        skill_sessions=skill_sessions,
+        skill_sessions=skill['sessions'],
         form=form
     )
 
