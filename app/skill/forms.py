@@ -2,9 +2,9 @@ from flask_wtf import FlaskForm
 from wtforms import StringField, IntegerField, validators
 
 class SessionForm(FlaskForm):
-    session_topic   = StringField()
-    entry = StringField(validators=[validators.optional()])
-    entry_figure = StringField(validators=[validators.optional()])
+    topic   = StringField()
+    entry = IntegerField(validators=[validators.optional()])
+    entry_figure = IntegerField(validators=[validators.optional()])
     recap = StringField(validators=[validators.optional()])
     zettel = StringField(validators=[validators.optional()])
     zettel_figure = StringField(validators=[validators.optional()])
