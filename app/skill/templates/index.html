@@ -27,7 +27,8 @@
                 <a href={{ url_for('skill_bp.skill_page', skill_name=skill_name) }}>
                      <p>{{skill_object.name}}</p>
                  </a>
-                <h3>Lv {{ skill_object.lv }}</h3>
+                 <p><b>Lv {{ skill_object.lv }}</b></p>
+                 <p>{{ skill_object.xp }} xp</p>
                 <hr>
             </div>
         {% endfor %}
