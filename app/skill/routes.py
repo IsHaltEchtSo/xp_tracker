@@ -100,3 +100,10 @@ def skill_page(skill_name):
 @skill_bp.route('/<skill>/reward')
 def reward_page(skill):
     return render_template('reward.html', skill=skill)
+
+
+
+@skill_bp.route('xp-rewards')
+def xp_rewards():
+    xp_dict = load_xp_rewards()
+    return render_template('xp-rewards.html', xp_dict=xp_dict)

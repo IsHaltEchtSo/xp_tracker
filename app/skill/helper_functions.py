@@ -25,5 +25,4 @@ def load_xp_rewards(path='json/rewards.json'):
 def calculate_lv(xp):
     if xp == 0:
         return 1
-
     return math.floor(-1.7 + 1.9*(xp+2) ** 0.5)

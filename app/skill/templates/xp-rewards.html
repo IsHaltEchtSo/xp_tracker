@@ -1,0 +1,16 @@
+{% extends 'base.html' %}
+
+{% block content %}
+<table>
+    <tr>
+        <th>Medium</th>
+        <th>XP</th>
+    </tr>
+    {% for medium, xp in xp_dict.items() %}
+    <tr>
+        <td>{{medium}}</td>
+        <td>{{xp}}</td>
+    </tr>
+    {% endfor %}
+</table>
+{% endblock content %}

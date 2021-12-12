@@ -1,6 +1,7 @@
 {% extends 'base.html' %}
 
 {% block content %}
+<a href={{ url_for('skill_bp.xp_rewards') }}>Show XP Table</a>
 
     <!-- SESSIONS LISTING -->
     <div class="history box">
@@ -10,7 +11,7 @@
                 <th>XP</th>
                 <th>Summary</th>
             </tr>
-            {% for session in skill_sessions %}
+            {% for session in skill_sessions | sort(attribute='date', reverse=True) %}
                 <tr>
                     <td>{{session.date}}</td>
                     <td>{{session.xp}}</td>
