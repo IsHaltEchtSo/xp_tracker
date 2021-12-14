@@ -1,11 +1,19 @@
-.parent-grid {
-    display: grid;
-    grid-template-columns: minmax(300px, 1fr) 3fr;
-}
-
 .skills-grid {
     display: grid;
-    grid-template-columns: repeat(auto-fit, minmax(200px, 1fr))
+    grid-template-columns: 300px auto;
+    margin-top: 20px;
+    margin-bottom: 20px;
+}
+
+.skills-card-grid {
+    display: grid;
+    grid-template-columns: repeat(auto-fill, minmax(200px, 1fr))
+}
+
+.button-grid {
+    display: grid;
+    grid-template-columns: 200px 200px;
+    margin-top: 30px;
 }
 
 .skill-card {
