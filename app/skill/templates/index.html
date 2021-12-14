@@ -1,8 +1,16 @@
 {% extends 'base.html' %}
 
+{% block imports %}
+
+<link rel='stylesheet'  href="{{ url_for('static', filename='css/index.css') }}">
+
+{% endblock imports %}
+
 {% block content %}
+
 <a href={{ url_for('skill_bp.xp_rewards') }}>Show XP Table</a>
 
+<div class="columnbox">
     <!-- SESSIONS LISTING -->
     <div class="history box">
         <table>
@@ -34,6 +42,7 @@
             </div>
         {% endfor %}
     </div>
+</div>
 
     <!-- FORM TO ADD SKILLS -->
     <form class="skill-form" action='{{ url_for('skill_bp.index') }}' method="post">

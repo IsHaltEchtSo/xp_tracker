@@ -3,12 +3,16 @@
     <head>
         <meta charset="utf-8">
         <title>Skill</title>
+        <link rel='stylesheet' type="text/css" href="{{ url_for('.static', filename='css/index.css') }}">
+        {% block imports %}
+
+        {% endblock imports %}
     </head>
     <body>
         {% include 'navbar.html' %}
 
         {% block content  %}
-        <p>this will be overriden</p>
+
         {% endblock content  %}
     </body>
 </html>
