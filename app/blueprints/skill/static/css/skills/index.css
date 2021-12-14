@@ -1,5 +1,11 @@
-.columnbox {
-    column-count: 4;
+.parent-grid {
+    display: grid;
+    grid-template-columns: minmax(300px, 1fr) 3fr;
+}
+
+.skills-grid {
+    display: grid;
+    grid-template-columns: repeat(auto-fit, minmax(200px, 1fr))
 }
 
 .skill-card {

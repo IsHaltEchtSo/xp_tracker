@@ -10,7 +10,7 @@
 
 <a href={{ url_for('skill_bp.xp_rewards') }}>Show XP Table</a>
 
-<div class="columnbox">
+<div class="parent-grid">
     <!-- SESSIONS LISTING -->
     <div class="history box">
         <table>
@@ -30,7 +30,7 @@
     </div>
 
     <!-- SKILLS LISTING -->
-    <div class="skills-list">
+    <div class="skills-grid">
         {% for skill_name, skill_object in skills.items() %}
         <div class="skill-card">
             <a class='skill-link' href={{ url_for('skill_bp.skill_page', skill_name=skill_name) }}>
