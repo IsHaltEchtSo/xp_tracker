@@ -5,7 +5,8 @@ from datetime import date
 
 
 skill_bp = Blueprint(
-    'skill_bp', __name__, url_prefix='/skills', template_folder='templates'
+    'skill_bp', __name__, url_prefix='/skills',
+    template_folder='templates', static_folder='static'
 )
 
 

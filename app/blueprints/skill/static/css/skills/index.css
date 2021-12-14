@@ -1,0 +1,28 @@
+.columnbox {
+    column-count: 4;
+}
+
+.skill-card {
+    box-sizing: border-box;
+    border: black solid 2px;
+    width: 200px;
+    padding-left: 40px;
+    margin-top: 4px;
+}
+
+.skill-link {
+    text-decoration: none;
+}
+    .skill-name {
+        font-weight: 900;
+        font-size: 20px;
+        color: green;
+    }
+    .skill-level {
+        font-weight: 600;
+        color: black;
+    }
+    .skill-xp {
+        font-weight: 300;
+        color: grey;
+    }
