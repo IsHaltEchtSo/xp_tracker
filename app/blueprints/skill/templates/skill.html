@@ -9,7 +9,7 @@
                 <th>XP</th>
                 <th>Summary</th>
             </tr>
-            {% for session in skill_sessions %}
+            {% for session in skill_sessions | sort(attribute='date', reverse=True) %}
                 <tr>
                     <td>{{session.date}}</td>
                     <td>{{session.xp}}</td>
