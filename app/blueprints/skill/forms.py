@@ -21,4 +21,4 @@ class SessionForm(FlaskForm):
 
 
 class SkillForm(FlaskForm):
-    skill_name = StringField()
+    skill_name = StringField('new skill name')

@@ -8,9 +8,7 @@
 
 {% block content %}
 
-<a href={{ url_for('skill_bp.xp_rewards') }}>Show XP Table</a>
-
-<div class="columnbox">
+<div class="skills-grid">
     <!-- SESSIONS LISTING -->
     <div class="history box">
         <table>
@@ -30,28 +28,31 @@
     </div>
 
     <!-- SKILLS LISTING -->
-    <div class="skills-list">
+    <div class="skills-card-grid">
         {% for skill_name, skill_object in skills.items() %}
-        <div class="skill-card">
-            <a class='skill-link' href={{ url_for('skill_bp.skill_page', skill_name=skill_name) }}>
-                <p class="skill-name"> {{skill_object.name}} </p>
-                <p class="skill-level"> Lv {{ skill_object.lv }} </p>
-                <p class="skill-xp"> {{ skill_object.xp }} xp </p>
-            </a>
-        </div>
+        <a class='skill-card' href={{ url_for('skill_bp.skill_page', skill_name=skill_name) }}>
+            <p class="skill-name"> {{skill_object.name}} </p>
+            <p class="skill-level"> Lv {{ skill_object.lv }} </p>
+            <p class="skill-xp"> {{ skill_object.xp }} xp </p>
+        </a>
         {% endfor %}
     </div>
 </div>
 
+<div class="button-grid">
     <!-- FORM TO ADD SKILLS -->
     <form class="skill-form" action='{{ url_for('skill_bp.index') }}' method="post">
         {{ form.csrf_token }}
         {% for field in form if field.id != 'csrf_token' %}
             {{ field.label }}
+            <br>
             {{ field }}
             <br>
         {% endfor %}
         <input type="submit" value="add skill">
     </form>
+
+    <a href={{ url_for('skill_bp.xp_rewards') }}>Show XP Table</a>
+</div>
 
 {% endblock content %}
