@@ -30,13 +30,11 @@
     <!-- SKILLS LISTING -->
     <div class="skills-card-grid">
         {% for skill_name, skill_object in skills.items() %}
-        <div class="skill-card">
-            <a class='skill-link' href={{ url_for('skill_bp.skill_page', skill_name=skill_name) }}>
-                <p class="skill-name"> {{skill_object.name}} </p>
-                <p class="skill-level"> Lv {{ skill_object.lv }} </p>
-                <p class="skill-xp"> {{ skill_object.xp }} xp </p>
-            </a>
-        </div>
+        <a class='skill-card' href={{ url_for('skill_bp.skill_page', skill_name=skill_name) }}>
+            <p class="skill-name"> {{skill_object.name}} </p>
+            <p class="skill-level"> Lv {{ skill_object.lv }} </p>
+            <p class="skill-xp"> {{ skill_object.xp }} xp </p>
+        </a>
         {% endfor %}
     </div>
 </div>
