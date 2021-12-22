@@ -21,16 +21,25 @@
 .skill-card {
     box-sizing: border-box;
     border: black solid 2px;
+    border-radius: 15%;
     width: 200px;
     padding-left: 40px;
     margin-top: 10px;
     text-decoration: none;
-    this-example:none;
+    box-shadow: 5px 5px black;
 }
+
+.skill-card:hover {
+    background-color: rgb(212, 230, 210);
+}
+    .skill-text-button {
+        display: inline;
+        background-color: yellow;
+    }
     .skill-name {
         font-weight: 900;
         font-size: 20px;
-        color: green;
+        color: blue;
     }
     .skill-level {
         font-weight: 600;
