@@ -87,7 +87,7 @@ def skill_page(skill_name):
         skill['lv'] = calculate_lv(skill['xp'])
 
         dump_skills_to(path='json/skills.json', skills=skills)
-        return redirect(url_for('skill_bp.reward_page', skill=skill_name))
+        return redirect(url_for('skill_bp.skill_page', skill_name=skill_name))
 
     return render_template('skill.html',
         skill=skill,
